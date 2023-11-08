@@ -1,4 +1,4 @@
-package projeto;
+package classes;
 
 public class Atendente {
     

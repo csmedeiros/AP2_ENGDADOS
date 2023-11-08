@@ -1,4 +1,4 @@
-package projeto;
+package classes;
 
 public class Gerente {
     String nome;
@@ -14,6 +14,7 @@ public class Gerente {
         return "";
     }
     
-    public Gerente(){
+    public Gerente(String entradaNome, String entradaCpf, String entradaRegistro) { 
+
+        }
     }
-}
