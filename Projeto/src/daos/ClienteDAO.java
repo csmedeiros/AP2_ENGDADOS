@@ -5,10 +5,7 @@
  */
 package daos;
 
-/**
- *
- * @author 202203369008
- */
+
 public class ClienteDAO {
     
 }

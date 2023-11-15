@@ -1,4 +1,5 @@
 package projeto;
+import java.util.ArrayList;
 
 public class Instrutor {
     
@@ -8,18 +9,6 @@ public class Instrutor {
     String cpf;
     
     
-    public String adicionarAula() {
-        String aula = "";
-        return aula;
-    }
-    public String removerAula() {
-        String aula = "";
-        return aula;
-    }
-    public String atualizarAula(){
-        String aula = "";
-        return aula;
-    }
     public Instrutor() {
     }
 }

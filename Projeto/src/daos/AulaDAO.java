@@ -26,20 +26,17 @@ public class AulaDAO {
             String sql = "INSERT INTO Aula (data, modalidade, fk_instrutor, id, fk_cliente) values(?, ?, ?, ?, ?)";
                     try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                    }
+                   
                 pstm.execute();
 
                 try (ResultSet rst = pstm.getGeneratedKeys()) {
                     while (rst.next()) {
-                        pessoa.setId(rst.getInt(1));
-                        for (  : pessoa.getTelefones()) {
-                            AulaDAO tdao = new TelefoneDAO(connection);
-                            tdao.create(telefone, pessoa);
-                        }
+                        // Codigo para pegar o resultado da consulta
                     }
                 }
             }
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+}
