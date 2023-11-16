@@ -1,4 +1,4 @@
-package projeto;
+package modelo;
 
 public class Principal {
     
