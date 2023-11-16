@@ -1,11 +1,11 @@
 
 package modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Aula {
     
-    private LocalDate data;
+    private LocalDateTime data;
     private String modalidade;
     private String instrutor;
     private String cliente;
@@ -14,11 +14,11 @@ public class Aula {
         
     }
     
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 
