@@ -7,7 +7,11 @@ public class Funcionario {
     private String registro;
     private String cargo;
     
-    public Funcionario() {
+    public Funcionario(String nome, float salario, String registro, String cargo) {
+        this.nome = nome;
+        this.salario = salario;
+        this.registro = registro;
+        this.cargo = cargo;
     }
     
     public String getNome() {

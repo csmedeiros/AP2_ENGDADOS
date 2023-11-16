@@ -10,8 +10,11 @@ public class Aula {
     private String instrutor;
     private String cliente;
     
-    public Aula() {
-        
+    public Aula(LocalDateTime data, String modalidade, String instrutor, String cliente) {
+        this.data = data;
+        this.modalidade = modalidade;
+        this.instrutor = instrutor;
+        this.cliente = cliente;
     }
     
     public LocalDateTime getData() {
@@ -33,8 +36,8 @@ public class Aula {
     public String getInstrutor() {
         return instrutor;
     }
-
-    public void setInstrutor(String instrutor) {
+ 
+    public void setInstrutor(String instrutor) { 
         this.instrutor = instrutor;
     }
 

@@ -75,7 +75,7 @@ public class AulaDAO {
         }
     }
       
-      public ArrayList<Aula> retriveAllComPessoaComTelefone() {
+      public ArrayList<Aula> retriveAll() {
 
         ArrayList<Aula> aulas = new ArrayList<Aula>();
         Aula ultimaAula = null;

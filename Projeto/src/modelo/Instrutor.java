@@ -7,7 +7,11 @@ public class Instrutor {
     private String registro;
     private String cpf;
     
-    public Instrutor(){
+    public Instrutor(String nome, float salario, String registro, String cpf){
+        this.nome = nome;
+        this.salario = salario;
+        this.registro = registro;
+        this.cpf = cpf;
     }
     
     public String getNome() {

@@ -8,8 +8,12 @@ public class Cliente {
     private String nome;
     private String endereco;
     
-    public Cliente() {
-        
+    public Cliente(String matricula, String cpf, String telefone, String nome, String endereco) {
+        this.matricula = matricula;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.nome = nome;
+        this.endereco = endereco;
     }
     
     public String getMatricula() {
