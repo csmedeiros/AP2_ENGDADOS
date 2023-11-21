@@ -113,7 +113,7 @@ public class AulaDAO {
                             ultimoInstrutor = i;
                         }
 
-                        if (rst.getString(9) != null) {
+                        if ((rst.getString(9) != null && ultimoCliente == null || !ultimoCliente.getMatricula.equals(rst.getString(9))) {
                             String c_matricula = rst.getString(9);
                             String c_cpf = rst.getString(10);
                             String c_telefone = rst.getString(11);

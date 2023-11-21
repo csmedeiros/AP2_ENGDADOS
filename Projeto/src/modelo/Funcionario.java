@@ -7,7 +7,7 @@ public class Funcionario {
     private String registro;
     private String cargo;
     
-    public Funcionario(String nome, float salario, String registro, String cargo) {
+    public Funcionario(String nome, String cpf, float salario, String registro, String cargo) {
         this.nome = nome;
         this.salario = salario;
         this.registro = registro;
@@ -42,5 +42,11 @@ public class Funcionario {
     }
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    public String getCpf() {
+        return this.cpf;
     }
 }
