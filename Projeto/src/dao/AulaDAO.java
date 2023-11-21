@@ -16,7 +16,7 @@ public class AulaDAO {
     }
  public void create(Aula aula) {
         try {
-            String sql = "INSERT INTO Aula (data, modalidade) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Aula (data, modalidade) VALUES (?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -84,10 +84,9 @@ public class AulaDAO {
         try {
 
             String sql = "SELECT a.data, a.modalidade, a.instrutor, a.cliente, i.registro, i.nome, i.salario, i.cpf, c.matricula, c.cpf, c.telefone, c.nome, c.endereco"
-                    + "FROM evento AS e "
-                    + "LEFT JOIN participacao AS ep ON ep.fk_evento = e.id "
-                    + "LEFT JOIN pessoa AS p ON ep.fk_pessoa = p.id "
-                    + "LEFT JOIN telefone AS t ON p.id = t.fk_pessoa";
+                    + "FROM Aula AS a"
+                    + "LEFT JOIN Cliente AS c ON c.matricula = a.fk_cliente "
+                    + "LEFT JOIN Instrutor AS i ON i.registro = a.fk_instrutor";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();

@@ -103,10 +103,9 @@ public class PagamentoDAO {
         try {
 
             String sql = "SELECT p.data, p.valor, p.modalidade, p.fk_cliente, p.fk_gerente, p.plano, c.matricula, c.cpf, c.telefone, c.nome, c.endereco, f.registro, f.nome, f.cpf, f.salario, f.cargo"
-                    + "FROM evento AS e "
-                    + "LEFT JOIN Pagamento AS p ON ep.fk_evento = e.id "
-                    + "LEFT JOIN Cliente AS c ON p.fk_cliente = c.matricula"
-                    + "LEFT JOIN Funcionario AS f ON p.fk_gerente = f.registro";
+                    + "FROM Pagamento AS p"
+                    + "LEFT JOIN Cliente AS c ON c.matricula = p.fk_cliente"
+                    + "LEFT JOIN Funcionario AS f ON f.registro = p.fk_gerente";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();
