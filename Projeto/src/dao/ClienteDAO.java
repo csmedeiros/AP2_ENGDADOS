@@ -29,4 +29,31 @@ public class ClienteDAO {
         }
     }
     
+        public void remove(Cliente cliente) {
+        try {
+            String sql = "DELETE FROM Cliente WHERE matricula = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+                pstm.setString(1, cliente.getMatricula());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+ 
+        // Cliente já deve estar cadastrado no banco
+        
+            public void atualizaTelefone(Cliente cliente) {
+        try {
+            String sql = "UPDATE Cliente telefone = ? WHERE registro = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                pstm.setString(1, cliente.getTelefone());
+                pstm.setString(2, cliente.getRegistro());
+                pstm.execute();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -32,4 +32,43 @@ public void create(Funcionario funcionario) {
             throw new RuntimeException(e);
         }
     }
+
+public void remove(Funcionario funcionario) {
+        try {
+            String sql = "DELETE FROM Funcionario WHERE registro = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                pstm.setString(1, funcionario.getRegistro());
+                pstm.execute();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateSalario(Funcionario funcionario) {
+            try {
+                String sql 
+   = "UPDATE Funcionario SET salario = ? WHERE registro = ?";
+             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    pstm.setFloat(2, funcionario.getSalario());
+                    pstm.setString(4, funcionario.getRegistro());
+                    pstm.execute();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        public void updateSalario(Funcionario funcionario) {
+            try {
+                String sql = "UPDATE Funcionario SET cargo = ? WHERE registro = ?";
+             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    pstm.setString(1, funcionario.getCargo());S
+                    pstm.setString(2, funcionario.getRegistro());
+                    pstm.execute();
+            } catch (SQLException e) {
+                }
+                throw new RuntimeException(e);
+            }
+        }
 }

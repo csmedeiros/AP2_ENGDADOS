@@ -16,7 +16,7 @@ public class AulaDAO {
     }
  public void create(Aula aula) {
         try {
-            String sql = "INSERT INTO Cliente (data, modalidade) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Aula (data, modalidade) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -29,18 +29,16 @@ public class AulaDAO {
         }
     }
  
- // A aula já deve estar cadastrada no banco de dados
+ // A aula e o instrutor já devem estar cadastrados no banco de dados
  
   public void atualizaInstrutor(Aula aula, Instrutor instrutor) {
         try {
-            String sql = "INSERT INTO Aula (data, modalidade, instrutor) VALUES (?, ?, ?, ?)";
+            String sql = "UPDATE Aula SET instrutor = ? WHERE data = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                pstm.setObject(1, aula.getData());
-                pstm.setString(2, aula.getModalidade());
-                pstm.setString(3, aula.getInstrutor());
-                pstm.setString(5, aula.getCliente());
+                pstm.setObject(1, aula.getData(), LocalDateTime.class);
+                pstm.setString(2, instrutor.getRegistro());
                 pstm.execute();
             }
         } catch (SQLException e) {
@@ -48,15 +46,15 @@ public class AulaDAO {
         }
     }
     
-   // A aula já deve estar cadastrada no banco de dados
+   // A aula e o cliente já devem estar cadastrados no banco de dados
   
     public void atualizaCliente(Aula aula, Cliente cliente) {
         try {
-            String sql = "INSERT INTO Aula (fk_cliente)VALUES (?)";
+            String sql = "UPDATE Aula SET fk_cliente = ? WHERE data = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-                pstm.setString(1, cliente.getMatricula());
+                pstm.setObject(1, aula.getData(), LocalDateTime.class);
+                pstm.setString(2, cliente.getMatricula());
                 pstm.execute();
             }
         } catch (SQLException e) {
@@ -65,9 +63,10 @@ public class AulaDAO {
     }
       public void remove(Aula aula) {
         try {
-            String sql = "INSERT INTO Aula (data, modalidade, instrutor) VALUES (?, ?, ?, ?)";
+            String sql = "DELETE FROM Aula WHERE data = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                pstm.getObject(1, aula.getData(), LocalDateTime.class);
                 pstm.execute();
             }
         } catch (SQLException e) {
@@ -84,7 +83,7 @@ public class AulaDAO {
 
         try {
 
-            String sql = "SELECT e.id, e.data_evento, e.descricao, p.id, p.nome, p.cpf, p.data_nascimento, p.idade, t.id, t.tipo, t.codigo_pais, t.codigo_area, t.numero "
+            String sql = "SELECT a.data, a.modalidade, a.instrutor, a.cliente, i.registro, i.nome, i.salario, i.cpf, c.matricula, c.cpf, c.telefone, c.nome, c.endereco"
                     + "FROM evento AS e "
                     + "LEFT JOIN participacao AS ep ON ep.fk_evento = e.id "
                     + "LEFT JOIN pessoa AS p ON ep.fk_pessoa = p.id "
