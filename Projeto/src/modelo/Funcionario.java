@@ -6,8 +6,9 @@ public class Funcionario {
     private float salario;
     private String registro;
     private String cargo;
+    private String cpf;
     
-    public Funcionario(String nome, String cpf, float salario, String registro, String cargo) {
+    public Funcionario(String nome, String cpf, float salario, String cargo, String registro) {
         this.nome = nome;
         this.salario = salario;
         this.registro = registro;

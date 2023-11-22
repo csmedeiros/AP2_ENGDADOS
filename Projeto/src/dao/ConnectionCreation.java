@@ -10,7 +10,7 @@ public class ConnectionCreation {
     try {
       String sgbd = "mysql";
       String endereco = "localhost";
-      String bd = "agenda";
+      String bd = "academia";
       String usuario = "root";
       String senha = "mysqlroot";
 

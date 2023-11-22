@@ -7,7 +7,7 @@ public class Instrutor {
     private String registro;
     private String cpf;
     
-    public Instrutor(String nome, float salario, String registro, String cpf){
+    public Instrutor(String nome, String cpf, float salario, String registro){
         this.nome = nome;
         this.salario = salario;
         this.registro = registro;

@@ -16,7 +16,7 @@ public class AulaDAO {
     }
  public void create(Aula aula) {
         try {
-            String sql = "INSERT INTO Aula (data, modalidade) VALUES (?, ?)";
+            String sql = "INSERT INTO Aula (data, modalidade) VALUES (?, ?);";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -37,7 +37,7 @@ public class AulaDAO {
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                pstm.setObject(1, aula.getData(), LocalDateTime.class);
+                pstm.setObject(1, aula.getData());
                 pstm.setString(2, instrutor.getRegistro());
                 pstm.execute();
             }
@@ -53,7 +53,7 @@ public class AulaDAO {
             String sql = "UPDATE Aula SET fk_cliente = ? WHERE data = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pstm.setObject(1, aula.getData(), LocalDateTime.class);
+                pstm.setObject(1, aula.getData());
                 pstm.setString(2, cliente.getMatricula());
                 pstm.execute();
             }
@@ -66,7 +66,7 @@ public class AulaDAO {
             String sql = "DELETE FROM Aula WHERE data = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pstm.getObject(1, aula.getData(), LocalDateTime.class);
+                pstm.setObject(1, aula.getData());
                 pstm.execute();
             }
         } catch (SQLException e) {
@@ -74,19 +74,16 @@ public class AulaDAO {
         }
     }
       
-      public ArrayList<Aula> retriveAll() {
+      public ArrayList<Aula> retrieveAll() {
 
-        ArrayList<Aula> aulas = new ArrayList<Aula>();
+        ArrayList<Aula> aulas = new ArrayList<>();
         Aula ultimaAula = null;
         Cliente ultimoCliente = null;
         Instrutor ultimoInstrutor = null;
 
         try {
 
-            String sql = "SELECT a.data, a.modalidade, a.instrutor, a.cliente, i.registro, i.nome, i.salario, i.cpf, c.matricula, c.cpf, c.telefone, c.nome, c.endereco"
-                    + "FROM Aula AS a"
-                    + "LEFT JOIN Cliente AS c ON c.matricula = a.fk_cliente "
-                    + "LEFT JOIN Instrutor AS i ON i.registro = a.fk_instrutor";
+            String sql = "SELECT a.data, a.modalidade, a.fk_instrutor, a.fk_cliente, i.registro, i.nome, i.salario, i.cpf, c.matricula, c.cpf, c.telefone, c.nome, c.endereco FROM Aula AS a LEFT JOIN Cliente AS c ON a.fk_cliente = c.matricula LEFT JOIN Instrutor AS i ON a.fk_instrutor = i.registro";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();
@@ -102,25 +99,6 @@ public class AulaDAO {
                             aulas.add(a);
                             ultimaAula = a;
                         }
-
-                        if ((rst.getString(4)!=null) && (ultimoInstrutor == null || !ultimoInstrutor.getRegistro().equals(rst.getString(4)))) {
-                            String i_registro = rst.getString(4);
-                            String i_nome = rst.getString(5);
-                            float i_salario = rst.getFloat(6);
-                            String i_cpf = rst.getString(7);
-                            Instrutor i = new Instrutor(i_nome, i_salario, i_registro, i_cpf);
-                            ultimoInstrutor = i;
-                        }
-
-                        if ((rst.getString(9) != null && ultimoCliente == null || !ultimoCliente.getMatricula.equals(rst.getString(9))) {
-                            String c_matricula = rst.getString(9);
-                            String c_cpf = rst.getString(10);
-                            String c_telefone = rst.getString(11);
-                            String c_nome = rst.getString(12);
-                            String c_endereco = rst.getString(13);
-                            Cliente c = new Cliente(c_matricula, c_cpf, c_telefone, c_nome, c_endereco);
-                            ultimoCliente = c;
-                        }
                     }
                 }
                 return aulas;
@@ -129,4 +107,27 @@ public class AulaDAO {
             throw new RuntimeException(e);
         }
     }
+      
+      public ArrayList<String> retrieveClientes() {
+          
+        ArrayList<String> clientes = new ArrayList<>();
+          
+        try {
+            String sql = "SELECT DISTINCT fk_cliente FROM Aula";
+            try(PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.execute();
+                try (ResultSet rst = pstm.getResultSet()) {
+                    while(rst.next()) {
+                    if(rst.getString(1)!=null) {
+                    clientes.add(rst.getString(1));
+                        }
+                    }
+                    return clientes;
+                }
+            }
+        }   catch(SQLException e) {
+                throw new RuntimeException(e);
+          }
+      }
+      
 }
